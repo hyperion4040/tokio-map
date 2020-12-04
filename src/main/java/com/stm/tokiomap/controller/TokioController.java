@@ -21,11 +21,11 @@ public class TokioController {
             value = "/getImage",
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    public @ResponseBody byte[] getImageWithMediaType(@RequestParam int width, @RequestParam int height) throws IOException {
+    public @ResponseBody byte[] getImageWithMediaType(@RequestParam int x1, @RequestParam int y1, @RequestParam int x2, @RequestParam int y2) throws IOException {
         InputStream in = getClass()
                 .getResourceAsStream("/tokio.png");
         final ClassLoader loader = getClass().getClassLoader();
-        BufferedImage image = cropImage(IOUtils.toByteArray(in),width,height);
+        BufferedImage image = cropImage(IOUtils.toByteArray(in),x1,y1,x2,y2);
         File pathFile = new File(loader.getResource(".").getFile()+"tokio1.png");
         ImageIO.write(image,"png", pathFile);
 
@@ -34,12 +34,16 @@ public class TokioController {
         return IOUtils.toByteArray(out);
     }
 
-    public static BufferedImage cropImage(byte[] image, int width, int height) throws IOException {
+    public static BufferedImage cropImage(byte[] image, int y1, int x1,int y2,int x2) throws IOException {
         InputStream in = new ByteArrayInputStream(image);
         BufferedImage originalImage = ImageIO.read(in);
-        int x = originalImage.getWidth()/2;
-        int y = originalImage.getHeight()/2;
-        return originalImage.getSubimage(x, y, width, height);
+//        int x = originalImage.getHeight()/2;
+//        int y = originalImage.getHeight()/2;
+        int weight = x2 - x1;
+        int height = y2 - y1;
+        int x = weight/2;
+        int y = height/2;
+        return originalImage.getSubimage(x, y, x2 - x1, y2 -y1);
     }
 
 
