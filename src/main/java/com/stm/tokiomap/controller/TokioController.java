@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
@@ -20,11 +21,11 @@ public class TokioController {
             value = "/getImage",
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    public @ResponseBody byte[] getImageWithMediaType() throws IOException {
+    public @ResponseBody byte[] getImageWithMediaType(@RequestParam int width, @RequestParam int height) throws IOException {
         InputStream in = getClass()
                 .getResourceAsStream("/tokio.png");
         final ClassLoader loader = getClass().getClassLoader();
-        BufferedImage image = cropImage(IOUtils.toByteArray(in),200,200);
+        BufferedImage image = cropImage(IOUtils.toByteArray(in),width,height);
         File pathFile = new File(loader.getResource(".").getFile()+"tokio1.png");
         ImageIO.write(image,"png", pathFile);
 
