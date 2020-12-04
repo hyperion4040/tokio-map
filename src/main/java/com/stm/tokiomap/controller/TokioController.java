@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,18 +21,27 @@ public class TokioController {
             produces = MediaType.IMAGE_JPEG_VALUE
     )
     public @ResponseBody byte[] getImageWithMediaType() throws IOException {
-        /*File imageFile = new File("tokio.png");
-        BufferedImage bufferedImage = ImageIO.read(imageFile);
-        BufferedImage image = cropImage(bufferedImage,bufferedImage.getWidth()/2,bufferedImage.getHeight()/2,100,100);
-        File pathFile = new File("tokio1.png");
-        ImageIO.write(image,"png", pathFile);*/
         InputStream in = getClass()
                 .getResourceAsStream("/tokio.png");
-        return IOUtils.toByteArray(in);
+        final ClassLoader loader = getClass().getClassLoader();
+        BufferedImage image = cropImage(IOUtils.toByteArray(in),200,200);
+        File pathFile = new File(loader.getResource(".").getFile()+"tokio1.png");
+        ImageIO.write(image,"png", pathFile);
+
+        InputStream out = loader.getResourceAsStream("tokio1.png");
+
+        return IOUtils.toByteArray(out);
     }
 
-    public static BufferedImage cropImage(BufferedImage bufferedImage, int x, int y, int width, int height){
-        BufferedImage croppedImage = bufferedImage.getSubimage(x, y, width, height);
-        return croppedImage;
+    public static BufferedImage cropImage(byte[] image, int width, int height) throws IOException {
+        InputStream in = new ByteArrayInputStream(image);
+        BufferedImage originalImage = ImageIO.read(in);
+        int x = originalImage.getWidth()/2;
+        int y = originalImage.getHeight()/2;
+        return originalImage.getSubimage(x, y, width, height);
     }
+
+
+
+
 }
