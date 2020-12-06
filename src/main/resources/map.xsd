@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://akozlowski/soap"
+>
+
+    <xs:element name="getImageRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="y1" type="xs:int"/>
+                <xs:element name="x1" type="xs:int"/>
+                <xs:element name="y2" type="xs:int"/>
+                <xs:element name="x2" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getImageResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="image" type="xs:base64Binary"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
