@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
+import static com.stm.tokiomap.service.ImageService.cropImage;
+
 @Controller
 public class TokioController {
 
@@ -36,21 +38,7 @@ public class TokioController {
 
     }
 
-    public static BufferedImage cropImage(byte[] image, int y1, int x1,int y2,int x2) throws IOException {
-        InputStream in = new ByteArrayInputStream(image);
-        BufferedImage originalImage = ImageIO.read(in);
-//        int x = originalImage.getHeight()/2;
-//        int y = originalImage.getHeight()/2;
-        int xMax = Math.min(Integer.max(x2, x1), 500);
-        int xMin = Math.max(Integer.min(x1,x2),0);
-        int weight = xMax - xMin;
-        int yMax = Math.min(Integer.max(y2, y1), 500);
-        int yMin = Math.max(Integer.min(y1,y2),0);
-        int height = yMax - yMin;
-        int x = weight/2 + xMin;
-        int y = height/2 + yMin;
-        return originalImage.getSubimage(x, y, weight, height);
-    }
+
 
 
 
