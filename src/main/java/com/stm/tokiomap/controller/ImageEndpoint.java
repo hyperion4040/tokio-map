@@ -20,10 +20,10 @@ public class ImageEndpoint {
         this.imageService = imageService;
     }
 
-    @PayloadRoot(namespace = "http://akozlowski/soap",localPart = "getImageResponse")
+    @PayloadRoot(namespace = "http://akozlowski/soap",localPart = "getImageRequest")
     @ResponsePayload()
     public GetImageResponse getSpecifiedImage(@RequestPayload GetImageRequest iq) throws IOException {
-        final byte[] image = imageService.getModifiedImage(iq.getY1(), iq.getX1(), iq.getY2(), iq.getX2());
+        final byte[] image = imageService.getModifiedImage(iq.getY1(), iq.getX1(), 400, 400);
         final GetImageResponse imageResponse = new GetImageResponse();
         imageResponse.setImage(image);
         return imageResponse;
