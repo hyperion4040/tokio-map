@@ -17,10 +17,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="y1" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="x1" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="y2" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="x2" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="y1" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="x1" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="y2" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="x2" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,16 +39,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "getImageRequest", namespace = "http://akozlowski/soap")
 public class GetImageRequest {
 
-    protected int y1;
-    protected int x1;
-    protected int y2;
-    protected int x2;
+    protected float y1;
+    protected float x1;
+    protected float y2;
+    protected float x2;
 
     /**
      * Gets the value of the y1 property.
      * 
      */
-    public int getY1() {
+    public float getY1() {
         return y1;
     }
 
@@ -56,7 +56,7 @@ public class GetImageRequest {
      * Sets the value of the y1 property.
      * 
      */
-    public void setY1(int value) {
+    public void setY1(float value) {
         this.y1 = value;
     }
 
@@ -64,7 +64,7 @@ public class GetImageRequest {
      * Gets the value of the x1 property.
      * 
      */
-    public int getX1() {
+    public float getX1() {
         return x1;
     }
 
@@ -72,7 +72,7 @@ public class GetImageRequest {
      * Sets the value of the x1 property.
      * 
      */
-    public void setX1(int value) {
+    public void setX1(float value) {
         this.x1 = value;
     }
 
@@ -80,7 +80,7 @@ public class GetImageRequest {
      * Gets the value of the y2 property.
      * 
      */
-    public int getY2() {
+    public float getY2() {
         return y2;
     }
 
@@ -88,7 +88,7 @@ public class GetImageRequest {
      * Sets the value of the y2 property.
      * 
      */
-    public void setY2(int value) {
+    public void setY2(float value) {
         this.y2 = value;
     }
 
@@ -96,7 +96,7 @@ public class GetImageRequest {
      * Gets the value of the x2 property.
      * 
      */
-    public int getX2() {
+    public float getX2() {
         return x2;
     }
 
@@ -104,7 +104,7 @@ public class GetImageRequest {
      * Sets the value of the x2 property.
      * 
      */
-    public void setX2(int value) {
+    public void setX2(float value) {
         this.x2 = value;
     }
 

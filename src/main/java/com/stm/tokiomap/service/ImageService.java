@@ -33,10 +33,14 @@ public class ImageService {
         ImageIO.write(image,"png", pathFile);
     }
 
-    public byte[] getModifiedImage(int y1, int x1, int y2, int x2) throws IOException {
+    public byte[] getModifiedImage(float y1, float x1, float y2, float x2) throws IOException {
         InputStream in = getClass()
                 .getResourceAsStream(TOKIO_PNG );
-        BufferedImage image = cropImage(IOUtils.toByteArray(in),y1,x1,y2,x2);
+
+
+
+
+        BufferedImage image = cropImage(IOUtils.toByteArray(in),(int)y1,(int)x1,(int)y2,(int) x2);
         File pathFile = new File(Objects.requireNonNull(loader.getResource(".")).getFile()+ TOKIO_1_PNG);
         ImageIO.write(image,"png", pathFile);
 

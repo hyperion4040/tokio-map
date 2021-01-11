@@ -5,10 +5,10 @@
     <xs:element name="getImageRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="y1" type="xs:int"/>
-                <xs:element name="x1" type="xs:int"/>
-                <xs:element name="y2" type="xs:int"/>
-                <xs:element name="x2" type="xs:int"/>
+                <xs:element name="y1" type="xs:float"/>
+                <xs:element name="x1" type="xs:float"/>
+                <xs:element name="y2" type="xs:float"/>
+                <xs:element name="x2" type="xs:float"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
