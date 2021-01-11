@@ -22,19 +22,19 @@ public class ImageService {
         InputStream in = new ByteArrayInputStream(image);
         BufferedImage originalImage = ImageIO.read(in);
 
-        float x1Natural = 139.61f;
-        float y1Natural = 35.82f;
+        int x1Natural = 13961;
+        int y1Natural = 3582;
 
-        float x2Natural = 139.92f;
-        float y2Natural = 35.54f;
+        int x2Natural = 13992;
+        int y2Natural = 3554;
 
-        int xMin = ((int)( (Math.max(Float.min(x1, x2), x1Natural) - x1Natural) * 100) * 400) / (int) (x2Natural * 100);
-        int xMax = ((int)( (Math.min(Float.max(x1, x2), x2Natural) - x1Natural) * 100) * 400) / (int) (x2Natural * 100);
+        int xMin = (Math.max(Math.min((int)(x1*100),(int)(x2*100)),x1Natural)-x1Natural)*400/(x2Natural-x1Natural);
+        int xMax = (Math.min(Math.max((int)(x1*100),(int)(x2*100)),x2Natural)-x1Natural)*400/(x2Natural-x1Natural);
+
         int weight = xMax - xMin;
-
-        int yMin = ((int)( (Math.max(Float.min(y1, y2), y1Natural) - y2Natural) * 100) * 400) / (int) (y1Natural * 100);
-        int yMax = ((int)( (Math.min(Float.max(y1, y2), y2Natural) - y2Natural) * 100) * 400) / (int) (y1Natural * 100);
-        int height = yMin - yMax;
+        int yMin = (Math.max(Math.min((int)(y1*100),(int)(y2*100)),y2Natural)-y2Natural)*400/(y1Natural-y2Natural);
+        int yMax = (Math.min(Math.max((int)(y1*100),(int)(y2*100)),y1Natural)-y2Natural)*400/(y1Natural-y2Natural);
+        int height = yMax - yMin;
 
         int x = weight / 2 + xMin;
         int y = height / 2 + yMin;
