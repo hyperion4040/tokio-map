@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -41,7 +42,15 @@ public class ImageService {
         if (x == 0 || y == 0 || weight / 2 == 0 || height / 2 == 0) {
             return originalImage;
         } else {
-            return originalImage.getSubimage(x, y, weight, height);
+            Graphics2D g2d = originalImage.createGraphics();
+            g2d.setColor(Color.BLACK);
+            float thickness = 5f;
+            Stroke oldStroke = g2d.getStroke();
+            g2d.setStroke(new BasicStroke(thickness));
+            g2d.drawRect(xMin, yMin, xMax, yMax);
+            g2d.dispose();
+            return originalImage;
+//            return originalImage.getSubimage(x, y, weight, height);
         }
 
 
