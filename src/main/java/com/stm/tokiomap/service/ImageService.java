@@ -28,12 +28,12 @@ public class ImageService {
         int x2Natural = 13992;
         int y2Natural = 3554;
 
-        int xMin = (Math.max(Math.min((int)(x1*100),(int)(x2*100)),x1Natural)-x1Natural)*400/(x2Natural-x1Natural);
-        int xMax = (Math.min(Math.max((int)(x1*100),(int)(x2*100)),x2Natural)-x1Natural)*400/(x2Natural-x1Natural);
+        int xMin = (Math.max(Math.min((int)(x1*100),(int)(x2*100)),x1Natural)-x1Natural)*500/(x2Natural-x1Natural);
+        int xMax = (Math.min(Math.max((int)(x1*100),(int)(x2*100)),x2Natural)-x1Natural)*500/(x2Natural-x1Natural);
 
         int weight = xMax - xMin;
-        int yMin = (Math.max(Math.min((int)(y1*100),(int)(y2*100)),y2Natural)-y2Natural)*400/(y1Natural-y2Natural);
-        int yMax = (Math.min(Math.max((int)(y1*100),(int)(y2*100)),y1Natural)-y2Natural)*400/(y1Natural-y2Natural);
+        int yMin = (Math.max(Math.min((int)(y1*100),(int)(y2*100)),y2Natural)-y2Natural)*500/(y1Natural-y2Natural);
+        int yMax = (Math.min(Math.max((int)(y1*100),(int)(y2*100)),y1Natural)-y2Natural)*500/(y1Natural-y2Natural);
         int height = yMax - yMin;
 
         int x = weight / 2 + xMin;
