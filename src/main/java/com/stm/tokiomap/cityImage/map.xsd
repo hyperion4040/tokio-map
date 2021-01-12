@@ -17,6 +17,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="image" type="xs:base64Binary"/>
+                <xs:element name="minimap" type="xs:base64Binary"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

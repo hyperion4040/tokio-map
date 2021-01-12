@@ -29,13 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "image"
+    "image","minimap"
 })
 @XmlRootElement(name = "getImageResponse", namespace = "http://akozlowski/soap")
 public class GetImageResponse {
 
     @XmlElement(required = true)
     protected byte[] image;
+
+    @XmlElement(required = true)
+    protected byte[] minimap;
 
     /**
      * Gets the value of the image property.
@@ -57,6 +60,28 @@ public class GetImageResponse {
      */
     public void setImage(byte[] value) {
         this.image = value;
+    }
+
+    /**
+     * Gets the value of the minimap property.
+     *
+     * @return
+     *     possible object is
+     *     byte[]
+     */
+    public byte[] getMinimap() {
+        return minimap;
+    }
+
+    /**
+     * Sets the value of the minimap property.
+     *
+     * @param value
+     *     allowed object is
+     *     byte[]
+     */
+    public void setMinimap(byte[] value) {
+        this.minimap = value;
     }
 
 }
