@@ -16,6 +16,12 @@ import java.util.Objects;
 @Service
 public class ImageService {
 
+   private final static int x1Natural = 13961;
+   private final static int y1Natural = 3582;
+
+   private final static int x2Natural = 13992;
+   private final static int y2Natural = 3554;
+
     public static final String TOKIO_PNG = "/tokio.png";
     public static final String TOKIO_1_PNG = "tokio1.png";
     private final ClassLoader loader = getClass().getClassLoader();
@@ -24,13 +30,9 @@ public class ImageService {
         InputStream in = new ByteArrayInputStream(image);
         BufferedImage originalImage = ImageIO.read(in);
 
-        int x1Natural = 13961;
-        int y1Natural = 3582;
 
-        int x2Natural = 13992;
-        int y2Natural = 3554;
 
-        int xMin = (Math.max(Math.min((int)(x1*100),(int)(x2*100)),x1Natural)-x1Natural)*800/(x2Natural-x1Natural);
+        /*int xMin = (Math.max(Math.min((int)(x1*100),(int)(x2*100)),x1Natural)-x1Natural)*800/(x2Natural-x1Natural);
         int xMax = (Math.min(Math.max((int)(x1*100),(int)(x2*100)),x2Natural)-x1Natural)*800/(x2Natural-x1Natural);
 
         int yMin =  800 -(Math.max(Math.min((int)(y1*100),(int)(y2*100)),y2Natural)-y2Natural)*800/(y1Natural-y2Natural);
@@ -39,19 +41,29 @@ public class ImageService {
         int height = yMin - yMax;
 
         int x = weight / 2 + xMin;
-        int y = height / 2 + yMin;
+        int y = height / 2 + yMin;*/
 
-        xMin = 0;
+        int xMaxNat = Math.min(Integer.max((int) (x2*100), (int)(x1*100)), x2Natural)-x1Natural;
+        int xMinNat = Math.max(Integer.min((int)(x1*100),(int)( x2*100)), x1Natural)-x1Natural;
+        int yMaxNat = Math.min(Integer.max((int)(y2*100),(int)( y1*100)), y1Natural)-y2Natural;
+        int yMinNat = Math.max(Integer.min((int)(y1*100),(int) (y2*100)), y2Natural)-y2Natural;
+
+        int xMax = xMaxNat*800/(x2Natural - x1Natural);
+        int xMin = xMinNat*800/(x2Natural-x1Natural);
+
+        int yMax = 800-yMaxNat*800/(y1Natural-y2Natural);
+        int yMin = 800-yMinNat*800/(y1Natural-y2Natural);
+
+
+        /*xMin = 0;
         xMax = 400;
         yMin = 0;
-        yMax = 400;
-        if (x == 0 || y == 0 || weight / 2 == 0 || height / 2 == 0) {
-            return originalImage;
-        } else {
-            BufferedImage bufferedImage = originalImage.getSubimage(xMin, yMin, (xMax-xMin), (yMax-yMin));
+        yMax = 400;*/
+
+            BufferedImage bufferedImage = originalImage.getSubimage(xMin, yMax, (xMax-xMin), (yMin-yMax));
             return Thumbnails.of(bufferedImage).size(800, 800).asBufferedImage();
 //            return originalImage.getSubimage(x, y, weight, height);
-        }
+
 //        return originalImage;
 
     }
@@ -60,11 +72,11 @@ public class ImageService {
         InputStream in = new ByteArrayInputStream(image);
         BufferedImage originalImage = ImageIO.read(in);
 
-        int x1Natural = 13961;
+      /*  int x1Natural = 13961;
         int y1Natural = 3582;
 
         int x2Natural = 13992;
-        int y2Natural = 3554;
+        int y2Natural = 3554;*/
 
         /*int xMin = (Math.max(Math.min((int) (x1 * 100), (int) (x2 * 100)), x1Natural) - x1Natural) * 800 / (x2Natural - x1Natural);
         int xMax = (Math.min(Math.max((int) (x1 * 100), (int) (x2 * 100)), x2Natural) - x1Natural) * 800 / (x2Natural - x1Natural);
