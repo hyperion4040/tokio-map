@@ -1,5 +1,6 @@
 package com.stm.tokiomap.service;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
@@ -32,19 +33,26 @@ public class ImageService {
         int xMin = (Math.max(Math.min((int)(x1*100),(int)(x2*100)),x1Natural)-x1Natural)*800/(x2Natural-x1Natural);
         int xMax = (Math.min(Math.max((int)(x1*100),(int)(x2*100)),x2Natural)-x1Natural)*800/(x2Natural-x1Natural);
 
-        int yMin = 800 - (Math.max(Math.min((int)(y1*100),(int)(y2*100)),y2Natural)-y2Natural)*800/(y1Natural-y2Natural);
-        int yMax = 800 - (Math.min(Math.max((int)(y1*100),(int)(y2*100)),y1Natural)-y2Natural)*800/(y1Natural-y2Natural);
+        int yMin =  800 -(Math.max(Math.min((int)(y1*100),(int)(y2*100)),y2Natural)-y2Natural)*800/(y1Natural-y2Natural);
+        int yMax =  800 -(Math.min(Math.max((int)(y1*100),(int)(y2*100)),y1Natural)-y2Natural)*800/(y1Natural-y2Natural);
         int weight = xMax - xMin;
         int height = yMin - yMax;
 
         int x = weight / 2 + xMin;
-        int y = height / 2 + yMax;
+        int y = height / 2 + yMin;
+
+        xMin = 400;
+        xMax = 800;
+        yMin = 400;
+        yMax = 800;
         if (x == 0 || y == 0 || weight / 2 == 0 || height / 2 == 0) {
             return originalImage;
         } else {
-            return originalImage.getSubimage(x, y, weight, height);
+            BufferedImage bufferedImage = originalImage.getSubimage(xMin, yMin, (xMax-xMin), (yMax-yMin));
+            return Thumbnails.of(bufferedImage).size(800, 800).asBufferedImage();
+//            return originalImage.getSubimage(x, y, weight, height);
         }
-
+//        return originalImage;
 
     }
 

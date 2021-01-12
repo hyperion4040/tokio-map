@@ -22,10 +22,10 @@ public class ImageEndpoint {
     @PayloadRoot(namespace = "http://akozlowski/soap", localPart = "getImageRequest")
     @ResponsePayload()
     public GetImageResponse getSpecifiedImage(@RequestPayload GetImageRequest iq) throws IOException {
-//        final byte[] image = imageService.getModifiedImage(iq.getY1(), iq.getX1(), iq.getY2(), iq.getX2());
+        final byte[] image = imageService.getModifiedImage(iq.getY1(), iq.getX1(), iq.getY2(), iq.getX2());
         final byte[] minimap = imageService.getMinimap(iq.getY1(), iq.getX1(), iq.getY2(), iq.getX2());
         final GetImageResponse imageResponse = new GetImageResponse();
-        imageResponse.setImage(minimap);
+        imageResponse.setImage(image);
         imageResponse.setMinimap(minimap);
         return imageResponse;
     }
