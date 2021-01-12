@@ -41,10 +41,10 @@ public class ImageService {
         int x = weight / 2 + xMin;
         int y = height / 2 + yMin;
 
-        xMin = 400;
-        xMax = 800;
-        yMin = 400;
-        yMax = 800;
+        xMin = 0;
+        xMax = 400;
+        yMin = 0;
+        yMax = 400;
         if (x == 0 || y == 0 || weight / 2 == 0 || height / 2 == 0) {
             return originalImage;
         } else {
@@ -66,18 +66,30 @@ public class ImageService {
         int x2Natural = 13992;
         int y2Natural = 3554;
 
-        int xMin = (Math.max(Math.min((int) (x1 * 100), (int) (x2 * 100)), x1Natural) - x1Natural) * 800 / (x2Natural - x1Natural);
+        /*int xMin = (Math.max(Math.min((int) (x1 * 100), (int) (x2 * 100)), x1Natural) - x1Natural) * 800 / (x2Natural - x1Natural);
         int xMax = (Math.min(Math.max((int) (x1 * 100), (int) (x2 * 100)), x2Natural) - x1Natural) * 800 / (x2Natural - x1Natural);
 
         int yMin = 800 - (Math.max(Math.min((int) (y1 * 100), (int) (y2 * 100)), y2Natural) - y2Natural) * 800 / (y1Natural - y2Natural);
-        int yMax = 800 - (Math.min(Math.max((int) (y1 * 100), (int) (y2 * 100)), y1Natural) - y2Natural) * 800 / (y1Natural - y2Natural);
+        int yMax = 800 - (Math.min(Math.max((int) (y1 * 100), (int) (y2 * 100)), y1Natural) - y2Natural) * 800 / (y1Natural - y2Natural);*/
+
+        int xMaxNat = Math.min(Integer.max((int) (x2*100), (int)(x1*100)), x2Natural)-x1Natural;
+        int xMinNat = Math.max(Integer.min((int)(x1*100),(int)( x2*100)), x1Natural)-x1Natural;
+        int yMaxNat = Math.min(Integer.max((int)(y2*100),(int)( y1*100)), y1Natural)-y2Natural;
+        int yMinNat = Math.max(Integer.min((int)(y1*100),(int) (y2*100)), y2Natural)-y2Natural;
+
+        int xMax = xMaxNat*800/(x2Natural - x1Natural);
+        int xMin = xMinNat*800/(x2Natural-x1Natural);
+
+        int yMax = 800-yMaxNat*800/(y1Natural-y2Natural);
+        int yMin = 800-yMinNat*800/(y1Natural-y2Natural);
 
         Graphics2D g2d = originalImage.createGraphics();
         g2d.setColor(Color.BLACK);
         float thickness = 5f;
+
         Stroke oldStroke = g2d.getStroke();
         g2d.setStroke(new BasicStroke(thickness));
-        g2d.drawRect(xMin, yMin, xMax, yMax);
+        g2d.drawRect(xMin, yMax, xMax, yMin);
         g2d.dispose();
         return originalImage;
     }
