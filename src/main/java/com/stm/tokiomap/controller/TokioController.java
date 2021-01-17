@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +25,13 @@ public class TokioController {
     )
     public @ResponseBody byte[] getImageWithMediaType(@RequestParam int x1, @RequestParam int y1, @RequestParam int x2, @RequestParam int y2) throws IOException {
         InputStream in = getClass()
-                .getResourceAsStream("/tokio.png");
+                .getResourceAsStream("/tokyo.png");
         final ClassLoader loader = getClass().getClassLoader();
         BufferedImage image = cropImage(IOUtils.toByteArray(in),y1,x1,y2,x2);
-        File pathFile = new File(Objects.requireNonNull(loader.getResource(".")).getFile()+"tokio1.png");
+        File pathFile = new File(Objects.requireNonNull(loader.getResource(".")).getFile()+"tokyo1.png");
         ImageIO.write(image,"png", pathFile);
 
-        InputStream out = loader.getResourceAsStream("tokio1.png");
+        InputStream out = loader.getResourceAsStream("tokyo1.png");
 
         return IOUtils.toByteArray(Objects.requireNonNull(out));
 
