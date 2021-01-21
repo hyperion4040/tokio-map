@@ -1,6 +1,10 @@
 package com.stm.tokiomap.service;
 
+import com.mortennobel.imagescaling.MultiStepRescaleOp;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.makers.FixedSizeThumbnailMaker;
+import net.coobird.thumbnailator.resizers.DefaultResizerFactory;
+import net.coobird.thumbnailator.resizers.Resizer;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +48,10 @@ public class ImageService {
         yMax = yMin;
         yMin = tmp;
 
+
             BufferedImage bufferedImage = originalImage.getSubimage(xMin, yMin, (xMax-xMin), (yMax-yMin));
-            return Thumbnails.of(bufferedImage).size(800, 800).asBufferedImage();
+
+        return bufferedImage;
     }
 
     private static BufferedImage getBufferedImage(final byte[] image) throws IOException {
@@ -75,7 +81,7 @@ public class ImageService {
         float thickness = 5f;
 
         g2d.setStroke(new BasicStroke(thickness));
-        g2d.drawRect(xMin, yMin, xMax, yMax);
+        g2d.drawRect(xMin, yMin, (xMax-xMin), (yMax-yMin));
         g2d.dispose();
         return originalImage;
     }
